@@ -28,6 +28,7 @@ public class NetscalerMonitor extends ABaseMonitor {
         List<Map<String,String>> servers = (List<Map<String,String>>)configuration.getConfigYml().get("servers");
         AssertUtils.assertNotNull(servers, "The 'servers' section in config.yml is not initialised");
         for (Map<String, String> server : servers) {
+            logger.debug("Starting the Netscaler Monitoring Task for server : " + server.get("name"));
             NetscalerMonitorTask task = new NetscalerMonitorTask(configuration, taskExecutor.getMetricWriteHelper(), server);
             taskExecutor.submit(server.get("name"), task);
         }
