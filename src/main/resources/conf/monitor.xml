@@ -1,0 +1,25 @@
+<monitor>
+    <name>com.appdynamics.extensions.netscaler.NetscalerMonitor</name>
+    <type>managed</type>
+    <enabled>true</enabled>
+    <description>Monitoring extension for Citrix Netscaler</description>
+    <monitor-configuration>
+    </monitor-configuration>
+    <monitor-run-task>
+        <name>com.appdynamics.extensions.netscaler.NetscalerMonitor Run Task</name>
+        <display-name>com.appdynamics.extensions.netscaler.NetscalerMonitor Run Task</display-name>
+        <description>com.appdynamics.extensions.netscaler.NetscalerMonitor Run Task</description>
+        <type>java</type>
+        <execution-style>periodic</execution-style>
+        <execution-frequency-in-seconds>60</execution-frequency-in-seconds>
+        <execution-timeout-in-secs>60</execution-timeout-in-secs>
+        <task-arguments>
+            <!-- config file-->
+            <argument name="config-file" is-required="true" default-value="monitors/com.appdynamics.extensions.netscaler.NetscalerMonitor/config.yml" />
+        </task-arguments>
+        <java-task>
+            <classpath>netscaler-monitoring-extension.jar</classpath>
+            <impl-class>com.appdynamics.extensions.netscaler.NetscalerMonitor</impl-class>
+        </java-task>
+    </monitor-run-task>
+</monitor>

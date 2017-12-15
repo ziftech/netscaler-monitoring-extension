@@ -1,0 +1,56 @@
+metrics:
+ Service:
+   - throughput:
+       alias: "throughput" #Throughput in mbps
+   - avgsvrttfb:
+       alias: "avgsvrttfb" #Average time to first byte
+   - state:
+       alias: "state" #Current state of server
+   - totalrequests:
+       alias: "totalrequests" #Total number of requests received on the service
+   - totalresponses:
+       alias: "totalresponses" #Total number of responses
+   - curclntconnections:
+       alias: "curclntconnections" #Average time to first byte
+   - cursrvrconnections:
+       alias: "cursrvrconnections" #Number of connections to the server behind the virtual server
+   - activetransactions:
+       alias: "activetransactions" #Number of active transactions handled by the service
+   - state:
+       alias: "state" #Current state of the system
+       convert:
+         "DOWN" : 0
+         "UP" : 1
+         "UNKNOWN" : 2
+         "OFS" : 3 #Out of service
+         "TROFS" : 4 #Transition out of service"
+         "TROFS_DOWN" : 5 #Down when going out of service
+
+ System:
+   - cpuusagepcnt:
+       alias: "cpuusagepcnt" #CPU utilization in %
+   - memsizemb:
+       alias: "memsizemb" #Currently allocated memory in MB
+   - memusagepcnt:
+       alias: "memusagepcnt" #Percentage of memory utilization
+
+ Load Balancing:
+   - tothits:
+       alias: "tothits" #Total number of hits
+   - totalrequests:
+       alias: "totalrequests" #Total number of requests
+   - totalresponses:
+       alias: "totalresponses"  #Total number of responses
+   - cursrvrconnections:
+       alias: "cursrvrconnections" #Number of connections to the server behind the virtual server
+   - curclntconnections:
+       alias: "curclntconnections" #Number of client connections
+   - state:
+       alias: #Current state of the system
+       convert:
+         "DOWN" : 0
+         "UP" : 1
+         "UNKNOWN" : 2
+         "OFS" : 3 #Out of service
+         "TROFS" : 4 #Transition out of service"
+         "TROFS_DOWN" : 5 #Down when going out of service
