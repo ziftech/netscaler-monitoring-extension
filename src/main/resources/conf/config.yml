@@ -1,17 +1,25 @@
-metricPrefix: "Server|Component:<Tier ID/Tier Name>|Custom Metrics|Netscaler Monitor"
+# Extensions Troubleshooting Document: https://community.appdynamics.com/t5/Knowledge-Base/How-to-troubleshoot-missing-custom-metrics-or-extensions-metrics/ta-p/28695
 
+# Please refer to step 4 in the Extensions Troubleshooting Document for instructions on how to obtain your Tier ID
+metricPrefix: "Server|Component:<Tier ID/Tier Name>|Custom Metrics|Netscaler Monitor|"
+
+# Configure your Netscaler ADX servers here
 servers:
- - name: "Netscaler ADX AWS"
-   host: "34.214.119.18"
+ - name: ""
+   host: ""
    port: ""
    username: ""
    password: ""
    encryptedPassword: ""
 
+#Please refer to the Password Encryption Documentation for instructions on how to configure an encryptionKey & encryptedPassword
+# https://community.appdynamics.com/t5/Knowledge-Base/How-to-use-Password-Encryption-with-Extensions/ta-p/29397
 encryptionKey:
 
 numberOfThreads: 20
 
+# The metrics published by the extension. You can configure additional metrics using the Netscaler API documentation
+# https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/11.1/statistics/statistics/?_ga=2.173931875.1514738593.1519078996-904321061.1516686644
 metrics:
  Service:
    - throughput:

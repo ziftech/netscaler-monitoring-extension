@@ -1,3 +1,11 @@
+/*
+ * Copyright 2018. AppDynamics LLC and its affiliates.
+ * All Rights Reserved.
+ * This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+ * The copyright notice above does not evidence any actual or intended publication of such source code.
+ *
+ */
+
 package com.appdynamics.extensions.netscaler.util;
 
 import com.appdynamics.extensions.metrics.Metric;
@@ -17,7 +25,7 @@ public class NetscalerUtils {
     private static final Logger logger = LoggerFactory.getLogger(NetscalerUtils.class);
     public static final String API_BASE = "/nitro/v1/stat";
     public static final String SERVICE_ENDPOINT = "/service";
-    public static final String SYSTEM_ENDPOINT = "/service";
+    public static final String SYSTEM_ENDPOINT = "/system";
     public static final String LB_ENDPOINT = "/lbvserver";
     public static final String DEFAULT_METRIC_PREFIX = "Custom Metrics|Netscaler Monitor|";
     public static final String MONITOR_NAME = "Netscaler Monitor";
@@ -45,5 +53,4 @@ public class NetscalerUtils {
         }
         return metricList;
     }
-
 }

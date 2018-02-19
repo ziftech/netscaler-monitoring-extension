@@ -1,3 +1,11 @@
+/*
+ * Copyright 2018. AppDynamics LLC and its affiliates.
+ * All Rights Reserved.
+ * This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+ * The copyright notice above does not evidence any actual or intended publication of such source code.
+ *
+ */
+
 package com.appdynamics.extensions.netscaler.metrics;
 
 import com.appdynamics.extensions.MetricWriteHelper;
@@ -56,7 +64,7 @@ public class LoadBalancingMetricsProcessor implements Runnable {
     private List<Metric> getLoadBalancingServerMetrics() {
         List<Metric> lbMetrics = Lists.newArrayList();
         JsonNode lbServers = HttpClientUtils.getResponseAsJson(httpClient,
-                serverURL + LB_ENDPOINT, JsonNode.class).get("lbvserver");
+                serverURL + API_BASE + LB_ENDPOINT, JsonNode.class).get("lbvserver");
         if (lbServers != null) {
             for (JsonNode lbServer : lbServers) {
                 String name = lbServer.get("name").asText();

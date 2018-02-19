@@ -1,3 +1,11 @@
+/*
+ * Copyright 2018. AppDynamics LLC and its affiliates.
+ * All Rights Reserved.
+ * This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+ * The copyright notice above does not evidence any actual or intended publication of such source code.
+ *
+ */
+
 package com.appdynamics.extensions.netscaler.metrics;
 
 import com.appdynamics.extensions.MetricWriteHelper;
@@ -56,7 +64,7 @@ public class SystemMetricsProcessor implements Runnable {
     private List<Metric> getSystemMetrics() {
         List<Metric> systemMetrics = Lists.newArrayList();
         JsonNode systemNode = HttpClientUtils.getResponseAsJson(httpClient,
-                serverURL + SYSTEM_ENDPOINT, JsonNode.class).get("system");
+                serverURL + API_BASE + SYSTEM_ENDPOINT, JsonNode.class).get("system");
         if (systemNode != null) {
             systemMetrics = getMetrics(monitorConfiguration.getMetricPrefix() + serverName +
                     METRIC_SEPARATOR + "System", systemMetricsFromCfg, systemNode);

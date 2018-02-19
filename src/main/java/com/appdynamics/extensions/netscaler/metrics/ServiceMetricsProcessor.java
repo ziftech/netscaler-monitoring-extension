@@ -1,3 +1,11 @@
+/*
+ * Copyright 2018. AppDynamics LLC and its affiliates.
+ * All Rights Reserved.
+ * This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+ * The copyright notice above does not evidence any actual or intended publication of such source code.
+ *
+ */
+
 package com.appdynamics.extensions.netscaler.metrics;
 
 import com.appdynamics.extensions.MetricWriteHelper;
@@ -56,7 +64,7 @@ public class ServiceMetricsProcessor implements Runnable {
     private List<Metric> getServiceMetrics() {
         List<Metric> serviceMetrics = Lists.newArrayList();
         JsonNode services = HttpClientUtils.getResponseAsJson(httpClient,
-                serverURL + SERVICE_ENDPOINT, JsonNode.class).get("service");
+                serverURL + API_BASE + SERVICE_ENDPOINT, JsonNode.class).get("service");
         if (services != null) {
             for (JsonNode service : services) {
                 String name = service.get("name").asText();
