@@ -1,6 +1,7 @@
 # Extensions Troubleshooting Document: https://community.appdynamics.com/t5/Knowledge-Base/How-to-troubleshoot-missing-custom-metrics-or-extensions-metrics/ta-p/28695
 
 # Please refer to step 4 in the Extensions Troubleshooting Document for instructions on how to obtain your Tier ID
+# Please make sure your metric prefix always ends with a '|'
 metricPrefix: "Server|Component:<Tier ID/Tier Name>|Custom Metrics|Netscaler Monitor|"
 
 # Configure your Netscaler ADX servers here
@@ -26,16 +27,14 @@ metrics:
        alias: "throughput" #Throughput in mbps
    - avgsvrttfb:
        alias: "avgsvrttfb" #Average time to first byte
-   - state:
-       alias: "state" #Current state of server
    - totalrequests:
        alias: "totalrequests" #Total number of requests received on the service
    - totalresponses:
        alias: "totalresponses" #Total number of responses
    - curclntconnections:
-       alias: "curclntconnections" #Average time to first byte
+       alias: "curclntconnections" #Number of connections to the client
    - cursrvrconnections:
-       alias: "cursrvrconnections" #Number of connections to the server behind the virtual server
+       alias: "cursrvrconnections" #Number of connections to the server
    - activetransactions:
        alias: "activetransactions" #Number of active transactions handled by the service
    - state:

@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <target.dir>${project.build.directory}/NetscalerMonitor</target.dir>
+        <target.dir>${project.build.directory}/NetScalerMonitor</target.dir>
     </properties>
 
     <dependencies>
@@ -150,7 +150,7 @@
                                     <fileset dir="${project.build.directory}" includes="${project.artifactId}.${project.packaging}"/>
                                 </copy>
                                 <zip destfile="${target.dir}-${project.version}.zip">
-                                    <zipfileset dir="${target.dir}" filemode="755" prefix="NetscalerMonitor/"/>
+                                    <zipfileset dir="${target.dir}" filemode="755" prefix="NetScalerMonitor/"/>
                                 </zip>
                                 <delete dir="${target.dir}"/>
                             </target>
