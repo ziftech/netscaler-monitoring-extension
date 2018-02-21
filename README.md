@@ -1,5 +1,4 @@
-# netscaler-monitoring-extension
-AppDynamics monitoring extension for Citrix NetScaler
+# AppDynamics Monitoring Extension for Citrix NetScaler
 
 ### Use Case
 Citrix NetScaler is an all-in-one web application delivery controller (ADC) that makes applications run up to five times 
@@ -162,8 +161,6 @@ using the correct group names and stat names as per the [Citrix documentation](h
   
 </td>
 </tr>
-
-<tr><td><strong>Metric Class</strong></td><td><strong>Description</strong></td>
 
 <tr>
 <td>Service Resource</td>
