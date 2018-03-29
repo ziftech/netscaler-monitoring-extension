@@ -61,81 +61,21 @@ Alternatively, download the latest release archive from [Github](https://github.
     
     numberOfThreads: 20
     
-    # The metrics published by the extension. You can configure additional metrics using the Netscaler API documentation
-    # https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/11.1/statistics/statistics/?_ga=2.173931875.1514738593.1519078996-904321061.1516686644
-    metrics:
-     Service:
-       - throughput:
-           alias: "throughput" #Throughput in mbps
-       - avgsvrttfb:
-           alias: "avgsvrttfb" #Average time to first byte
-       - state:
-           alias: "state" #Current state of server
-       - totalrequests:
-           alias: "totalrequests" #Total number of requests received on the service
-       - totalresponses:
-           alias: "totalresponses" #Total number of responses
-       - curclntconnections:
-           alias: "curclntconnections" #Average time to first byte
-       - cursrvrconnections:
-           alias: "cursrvrconnections" #Number of connections to the server behind the virtual server
-       - activetransactions:
-           alias: "activetransactions" #Number of active transactions handled by the service
-       - state:
-           alias: "state" #Current state of the system
-           convert:
-             "DOWN" : 0
-             "UP" : 1
-             "UNKNOWN" : 2
-             "OFS" : 3 #Out of service
-             "TROFS" : 4 #Transition out of service"
-             "TROFS_DOWN" : 5 #Down when going out of service
-    
-     System:
-       - cpuusagepcnt:
-           alias: "cpuusagepcnt" #CPU utilization in %
-       - memsizemb:
-           alias: "memsizemb" #Currently allocated memory in MB
-       - memusagepcnt:
-           alias: "memusagepcnt" #Percentage of memory utilization
-    
-     Load Balancing:
-       - tothits:
-           alias: "tothits" #Total number of hits
-       - totalrequests:
-           alias: "totalrequests" #Total number of requests
-       - totalresponses:
-           alias: "totalresponses"  #Total number of responses
-       - cursrvrconnections:
-           alias: "cursrvrconnections" #Number of connections to the server behind the virtual server
-       - curclntconnections:
-           alias: "curclntconnections" #Number of client connections
-       - state:
-           alias: #Current state of the system
-           convert:
-             "DOWN" : 0
-             "UP" : 1
-             "UNKNOWN" : 2
-             "OFS" : 3 #Out of service
-             "TROFS" : 4 #Transition out of service"
-             "TROFS_DOWN" : 5 #Down when going out of service
-
-    ```
-3. Configure the path to the config.yml file by editing the <task-arguments> in the monitor.xml file in the `<MACHINE_AGENT_HOME>/monitors/NetScalerMonitor/` directory. Below is the sample
+3. Configure the path to the config.yml & metrics.xml by editing the <task-arguments> in the monitor.xml file in the `<MACHINE_AGENT_HOME>/monitors/NetScalerMonitor/` directory. Below is the sample
 
      ```
      <task-arguments>
          <!-- config file-->
          <argument name="config-file" is-required="true" default-value="monitors/NetScalerMonitor/config.yml" />
+         <argument name="metric-file" is-required="true" default-value="monitors/NetScalerMonitor/metrics.xml" />
           ....
      </task-arguments>
       ```
 4. Restart the machine agent. 
 
 ### Metrics 
-Here is a summary of the metrics published by this extension. You can add/remove metrics of your choosing by modifying the config.yml file by 
-using the correct group names and stat names as per the [Citrix documentation](https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/11.1/statistics/statistics/)
-
+Here is a summary of the metrics published by this extension. You can add/remove metrics of your choosing by modifying the provided metrics.xml file by 
+using the correct stat names as per the [Citrix documentation](https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/11.1/statistics/statistics/)
 
 <table>
 <tr><td><strong>Metric Class</strong></td><td><strong>Description</strong></td>
@@ -232,13 +172,10 @@ For any support related questions, you can also contact help@appdynamics.com.
 ### Contributing
 Always feel free to fork and contribute any changes directly via GitHub.
 
-### Compatibility
-This extension has been built using an instance of NetScaler VPX 12.0 53.18 within Amazon Web Services. 
-Compatible with Machine Agent v4.2.x+ 
 
 ### Version
 Version: 1.0.0
 Controller Compatibility: 3.7 or Later
 Product Tested On: NetScaler VPX 10.x on AWS
-Last updated On: 02/22/2018
+Last updated On: 03/29/2018
 List of Changes to this extension: 
