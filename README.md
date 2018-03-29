@@ -18,13 +18,16 @@ resources using the NITRO API. These metrics can be classified under the followi
 3. Load Balancing metrics
 
 ### Prerequisites 
+
+In order to use this extension, you do need a [Standalone JAVA Machine Agent](https://docs.appdynamics.com/display/PRO44/Java+Agent) or [SIM Agent](https://docs.appdynamics.com/display/PRO44/Server+Visibility). 
+For more details on downloading these products, please visit https://download.appdynamics.com/.
+
+The extension needs to be able to connect to the NetScaler NITRO API in order to be able to collect and send the metrics. 
+To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
+
 The NetScaler extension connects to the Citrix Netscaler appliance using the NITRO REST API. Please ensure that your system meets the 
 following requirements before installing this extension: 
 
-- **NetScaler Version:** The extension requires NetScaler VPX or MPX, version 10.x+. You can install NetScaler VPX on AWS using 
-these [instructions](https://docs.citrix.com/en-us/netscaler/11-1/deploying-vpx/install-vpx-on-aws.html)
-- In the NetScaler user interface, you must create a user account for monitoring purposes 
-- An AppDynamics Java Machine Agent
 
 ### Installation 
 1. To build from source, clone this repository and run 'mvn clean install'. This will produce a NetScalerMonitor-VERSION.zip in the target directory
@@ -38,9 +41,7 @@ Alternatively, download the latest release archive from [Github](https://github.
 1. Configure the NetScaler parameters by editing the config.yml file in `<MACHINE_AGENT_HOME>/monitors/NetScalerMonitor/`. 
 
    Here is a sample config.yml file
-    ```
-    # Extensions Troubleshooting Document: https://community.appdynamics.com/t5/Knowledge-Base/How-to-troubleshoot-missing-custom-metrics-or-extensions-metrics/ta-p/28695
-    
+    ```    
     # Please refer to step 4 in the Extensions Troubleshooting Document for instructions on how to obtain your Tier ID
     # Please make sure your metric prefix always ends with a '|'
     metricPrefix: "Server|Component:<Tier ID/Tier Name>|Custom Metrics|Netscaler Monitor|"
@@ -217,14 +218,15 @@ If after going through the Troubleshooting Document you have not been able to ge
 
 Please provide the following in order for us to assist you better.  
 
-Stop the running machine agent .
-Delete all existing logs under <MachineAgent>/logs .
-Please enable debug logging by editing the file <MachineAgent>/conf/logging/log4j.xml. Change the level value of the following <logger> elements to debug. 
-<logger name="com.singularity">
+1. Stop the running machine agent .
+2. Delete all existing logs under <MachineAgent>/logs .
+3. Please enable debug logging by editing the file <MachineAgent>/conf/logging/log4j.xml. Change the level value of the following <logger> elements to debug. 
+ <logger name="com.singularity">
 <logger name="com.appdynamics">
-Start the machine agent and please let it run for 10 mins. Then zip and upload all the logs in the directory <MachineAgent>/logs/*.
-Attach the zipped <MachineAgent>/conf/* directory here.
- Attach the zipped <MachineAgent>/monitors/ExtensionFolderYouAreHavingIssuesWith directory here .
+4. Start the machine agent and please let it run for 10 mins. Then zip and upload all the logs in the directory <MachineAgent>/logs/*.
+5. Attach the zipped <MachineAgent>/conf/* directory here.
+ 6. Attach the zipped <MachineAgent>/monitors/NetScalerMonitor directory here .
+
 For any support related questions, you can also contact help@appdynamics.com.
 
 ### Contributing
@@ -235,6 +237,8 @@ This extension has been built using an instance of NetScaler VPX 12.0 53.18 with
 Compatible with Machine Agent v4.2.x+ 
 
 ### Version
-| Version | Description |
-| ----- | ----- |
-| 1.0.0 | Development of the extension using the 2.0 framework. |
+Version: 1.0.0
+Controller Compatibility: 3.7 or Later
+Product Tested On: NetScaler VPX 10.x on AWS
+Last updated On: 02/22/2018
+List of Changes to this extension: 

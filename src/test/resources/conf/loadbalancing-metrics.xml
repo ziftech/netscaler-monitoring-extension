@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright 2018. AppDynamics LLC and its affiliates.
+  ~ All Rights Reserved.
+  ~ This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+  ~ The copyright notice above does not evidence any actual or intended publication of such source code.
+  ~
+  -->
+<stats>
+<stat url="/nitro/v1/stat/lbvserver" filter-name="lbvserver" alias="Load Balancing Server Metrics">
+        <naming use-entry-name="true"/>
+       <metric attr="tothits" alias="Hits" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+        <metric attr="totalrequests" alias="Requests" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+        <metric attr="totalresponses" alias="Responses" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+        <metric attr="cursrvrconnections" alias="Server Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+        <metric attr="curclntconnections" alias="Client Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+        <metric attr="state" alias="State" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL">
+                <converter str="DOWN" value="0"/>
+                <converter str="UP" value="1"/>
+                <converter str="UNKNOWN" value="2"/>
+                <converter str="OFS" value="3"/>
+                <converter str="TROFS" value="4"/>
+                <converter str="TROFS_DOWN" value="5"/>
+        </metric>
+</stat>
+</stats>
