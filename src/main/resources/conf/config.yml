@@ -7,8 +7,8 @@ servers:
  - name: "" #name, host, port are mandatory.
    host: ""
    port:
-   username: "nsroot"
-   password: "i-0324b903137ddb353"
+   username: ""
+   password: ""
    encryptedPassword: ""
 
 #Please refer to the Password Encryption Documentation for instructions on how to configure an encryptionKey & encryptedPassword
