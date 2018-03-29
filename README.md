@@ -180,4 +180,4 @@ Version: 1.0.0 <br />
 Controller Compatibility: 3.7 or Later <br />
 Product Tested On: NetScaler VPX 10.x on AWS <br />
 Last updated On: 03/29/2018 <br />
-List of Changes to this extension: 
+List of Changes to this extension: [Change log](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/netscaler-monitoring-extension-1.0.0/changelog.md)
