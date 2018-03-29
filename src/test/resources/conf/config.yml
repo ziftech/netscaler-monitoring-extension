@@ -4,8 +4,6 @@ metrics:
        alias: "throughput" #Throughput in mbps
    - avgsvrttfb:
        alias: "avgsvrttfb" #Average time to first byte
-   - state:
-       alias: "state" #Current state of server
    - totalrequests:
        alias: "totalrequests" #Total number of requests received on the service
    - totalresponses:
