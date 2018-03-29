@@ -161,8 +161,10 @@ Please provide the following in order for us to assist you better.  
 1. Stop the running machine agent .
 2. Delete all existing logs under <MachineAgent>/logs .
 3. Please enable debug logging by editing the file <MachineAgent>/conf/logging/log4j.xml. Change the level value of the following <logger> elements to debug. 
- <logger name="com.singularity">
-<logger name="com.appdynamics">
+   ```
+   <logger name="com.singularity">
+   <logger name="com.appdynamics">
+     ```
 4. Start the machine agent and please let it run for 10 mins. Then zip and upload all the logs in the directory <MachineAgent>/logs/*.
 5. Attach the zipped <MachineAgent>/conf/* directory here.
  6. Attach the zipped <MachineAgent>/monitors/NetScalerMonitor directory here .
@@ -174,8 +176,8 @@ Always feel free to fork and contribute any changes directly via GitHub.
 
 
 ### Version
-Version: 1.0.0
-Controller Compatibility: 3.7 or Later
-Product Tested On: NetScaler VPX 10.x on AWS
-Last updated On: 03/29/2018
+Version: 1.0.0 <br />
+Controller Compatibility: 3.7 or Later <br />
+Product Tested On: NetScaler VPX 10.x on AWS <br />
+Last updated On: 03/29/2018 <br />
 List of Changes to this extension: 
