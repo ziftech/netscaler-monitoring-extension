@@ -7,6 +7,7 @@
   -->
 
 <stats>
+    <!--TODO the name filter-name doesn't sound right..use standard from jaxb like rootElement-->
     <stat url="/nitro/v1/stat/system" filter-name="system" alias="System Metrics">
         <metric attr="cpuusagepcnt" alias="CPU utilization %" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="memsizemb" alias="Allocated Memory (MB)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
@@ -17,6 +18,7 @@
     </stat>
 
     <stat url="/nitro/v1/stat/lbvserver" filter-name="lbvserver" alias="Load Balancing Server Metrics">
+        <!-- The total metrics qualifiers seem incorrect. -->
         <metric attr="tothits" alias="Hits" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="totalrequests" alias="Requests" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="totalresponses" alias="Responses" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />

@@ -67,6 +67,7 @@ class MetricDataParser {
         Metric metric = null;
         BigDecimal metricValue;
         if (currentNode.has(metricConfig.getAttr())) {
+            //TODO you shouldn't be using your own convert. The commons platform handles convert.
             if (metricConfig.hasConverter()) {
                 metricValue = convertMetricValue(metricConfig, currentNode);
             } else {
