@@ -55,7 +55,6 @@ Alternatively, download the latest release archive from [Github](https://github.
        encryptedPassword: ""
     
     #Please refer to the Password Encryption Documentation for instructions on how to configure an encryptionKey & encryptedPassword
-    # https://community.appdynamics.com/t5/Knowledge-Base/How-to-use-Password-Encryption-with-Extensions/ta-p/29397
     encryptionKey:
     
     numberOfThreads: 20
@@ -171,12 +170,13 @@ Please provide the following in order for us to assist you better.  
 For any support related questions, you can also contact help@appdynamics.com.
 
 ### Contributing
-Always feel free to fork and contribute any changes directly via GitHub.
+Always feel free to fork and contribute any changes directly via [GitHub](https://github.com/Appdynamics/netscaler-monitoring-extension).
 
-
-### Version
-Version: 1.0.0 <br />
-Controller Compatibility: 3.7 or Later <br />
-Product Tested On: NetScaler VPX 10.x on AWS <br />
-Last updated On: 03/29/2018 <br />
-List of Changes to this extension: [Change log](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/netscaler-monitoring-extension-1.0.0/changelog.md)
+## Version
+|          Name            |  Version   |
+|--------------------------|------------|
+|Extension Version         |1.0.0       |
+|Controller Compatibility  |3.7 or Later|
+|Product Tested On         |NetScaler VPX 10.x on AWS|
+|Last Update               |03/29/2018 |
+|List of Changes           |[Change log](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/netscaler-monitoring-extension-1.0.0/changelog.md) |
