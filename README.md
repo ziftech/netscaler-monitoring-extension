@@ -25,8 +25,7 @@ For more details on downloading these products, please visit https://download.ap
 The extension needs to be able to connect to the NetScaler NITRO API in order to be able to collect and send the metrics. 
 To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
 
-The NetScaler extension connects to the Citrix Netscaler appliance using the NITRO REST API. Please ensure that your system meets the 
-following requirements before installing this extension: 
+The NetScaler extension connects to the Citrix Netscaler appliance using the NITRO REST API. 
 
 
 ### Installation 
