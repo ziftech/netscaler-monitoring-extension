@@ -6,7 +6,7 @@
   ~
   -->
 <stats>
-    <stat url="/nitro/v1/stat/service" filter-name="service" alias="Service Metrics">
+    <stat url="/nitro/v1/stat/service" rootElement="service" alias="Service Metrics">
         <naming use-entry-name="true"/>
         <metric attr="throughput" alias="Throughput (MBPS)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="avgsvrttfb" alias="Average time to first byte" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
@@ -16,12 +16,12 @@
         <metric attr="curclntconnections" alias="Client Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="activetransactions" alias="Active Transactions" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="state" alias="State" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL">
-            <converter str="DOWN" value="0"/>
-            <converter str="UP" value="1"/>
-            <converter str="UNKNOWN" value="2"/>
-            <converter str="OFS" value="3"/>
-            <converter str="TROFS" value="4"/>
-            <converter str="TROFS_DOWN" value="5"/>
+            <convert str="DOWN" value="0"/>
+            <convert str="UP" value="1"/>
+            <convert str="UNKNOWN" value="2"/>
+            <convert str="OFS" value="3"/>
+            <convert str="TROFS" value="4"/>
+            <convert str="TROFS_DOWN" value="5"/>
         </metric>
     </stat>
 </stats>

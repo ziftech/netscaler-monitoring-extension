@@ -8,6 +8,7 @@
 
 package com.appdynamics.extensions.netscaler.input;
 
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,8 +36,8 @@ public class MetricConfig {
     private BigDecimal multiplier;
     @XmlElement(name="isBoolean")
     private String isBoolean= "false";
-    @XmlElement(name = "converter")
-    private MetricConverter[] converters;
+    @XmlElement(name = "convert")
+    private MetricConverter[] convert;
 
     public String getAttr() {
         return attr;
@@ -102,15 +103,26 @@ public class MetricConfig {
         this.clusterRollUpType = clusterRollUpType;
     }
 
-    public MetricConverter[] getConverters() {
-        return converters;
+    public Map<String, String> getConvert() {
+        Map<String, String> converterMap = Maps.newHashMap();
+        if(convert!=null && convert.length > 0) {
+            return generateConverterMap(converterMap);
+        }
+        return converterMap;
     }
 
-    public void setConverters(MetricConverter[] converters) {
-        this.converters = converters;
+    private Map<String, String> generateConverterMap(Map<String, String> converterMap) {
+        for(MetricConverter converter : convert) {
+            converterMap.put(converter.getLabel(), converter.getValue());
+        }
+        return converterMap;
     }
 
-    public boolean hasConverter() {
+    public void setConvert(MetricConverter[] converters) {
+        this.convert = convert;
+    }
+
+/*    //public boolean hasConverter() {
         return converters !=null && converters.length > 0;
-    }
+    }*/
 }

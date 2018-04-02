@@ -21,8 +21,8 @@ public class Stat {
     private String url;
     @XmlAttribute
     private String alias;
-    @XmlAttribute(name = "filter-name")
-    private String filterName;
+    @XmlAttribute(name = "rootElement")
+    private String rootElement;
     @XmlAttribute(name = "metric-type")
     private String metricType;
     @XmlAttribute
@@ -33,12 +33,12 @@ public class Stat {
     public Stat[] stats;
 
 
-    public String getFilterName() {
-        return filterName;
+    public String getRootElement() {
+        return rootElement;
     }
 
-    public void setFilterName(String filterName) {
-        this.filterName = filterName;
+    public void setRootElement(String rootElement) {
+        this.rootElement = rootElement;
     }
 
     public String getAlias() {

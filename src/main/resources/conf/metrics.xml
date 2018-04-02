@@ -7,46 +7,46 @@
   -->
 
 <stats>
-    <stat url="/nitro/v1/stat/system" filter-name="system" alias="System Metrics">
-        <metric attr="cpuusagepcnt" alias="CPU utilization %" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="memsizemb" alias="Allocated Memory (MB)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="memusagepcnt" alias="Memory Utilization %" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="numcpus" alias="CPU Count" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="memuseinmb" alias="Memory used (MB)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
+    <stat url="/nitro/v1/stat/system" rootElement="system" alias="System Metrics">
+        <metric attr="cpuusagepcnt" alias="CPU utilization %" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memsizemb" alias="Allocated Memory (MB)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memusagepcnt" alias="Memory Utilization %" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="numcpus" alias="CPU Count" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memuseinmb" alias="Memory used (MB)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
 
     </stat>
 
-    <stat url="/nitro/v1/stat/lbvserver" filter-name="lbvserver" alias="Load Balancing Server Metrics">
-        <metric attr="tothits" alias="Hits" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="totalrequests" alias="Requests" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="totalresponses" alias="Responses" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="cursrvrconnections" alias="Server Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="curclntconnections" alias="Client Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="state" alias="State" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL">
-            <converter str="DOWN" value="0"/>
-            <converter str="UP" value="1"/>
-            <converter str="UNKNOWN" value="2"/>
-            <converter str="OFS" value="3"/>
-            <converter str="TROFS" value="4"/>
-            <converter str="TROFS_DOWN" value="5"/>
+    <stat url="/nitro/v1/stat/lbvserver" rootElement="lbvserver" alias="Load Balancing Server Metrics">
+        <metric attr="tothits" alias="Hits" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalrequests" alias="Requests" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalresponses" alias="Responses" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="cursrvrconnections" alias="Server Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="curclntconnections" alias="Client Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="state" alias="State" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL">
+            <convert str="DOWN" value="0"/>
+            <convert str="UP" value="1"/>
+            <convert str="UNKNOWN" value="2"/>
+            <convert str="OFS" value="3"/>
+            <convert str="TROFS" value="4"/>
+            <convert str="TROFS_DOWN" value="5"/>
         </metric>
     </stat>
 
-    <stat url="/nitro/v1/stat/service" filter-name="service" alias="Service Metrics">
-        <metric attr="throughput" alias="Throughput (MBPS)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="avgsvrttfb" alias="Average time to first byte" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="totalrequests" alias="Requests" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="totalresponses" alias="Responses" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="cursrvrconnections" alias="Server Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="curclntconnections" alias="Client Connections" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="activetransactions" alias="Active Transactions" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
-        <metric attr="state" alias="State" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL">
-            <converter str="DOWN" value="0"/>
-            <converter str="UP" value="1"/>
-            <converter str="UNKNOWN" value="2"/>
-            <converter str="OFS" value="3"/>
-            <converter str="TROFS" value="4"/>
-            <converter str="TROFS_DOWN" value="5"/>
+    <stat url="/nitro/v1/stat/service" rootElement="service" alias="Service Metrics">
+        <metric attr="throughput" alias="Throughput (MBPS)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="avgsvrttfb" alias="Average time to first byte" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalrequests" alias="Requests" aggregationType="OBSERVATION" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalresponses" alias="Responses" aggregationType="OBSERVATION" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="cursrvrconnections" alias="Server Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="curclntconnections" alias="Client Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="activetransactions" alias="Active Transactions" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="state" alias="State" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL">
+            <convert str="DOWN" value="0"/>
+            <convert str="UP" value="1"/>
+            <convert str="UNKNOWN" value="2"/>
+            <convert str="OFS" value="3"/>
+            <convert str="TROFS" value="4"/>
+            <convert str="TROFS_DOWN" value="5"/>
         </metric>
     </stat>
 </stats>

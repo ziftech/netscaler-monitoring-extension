@@ -28,7 +28,8 @@ import java.util.Map;
  */
 public class MetricDataParserTest {
 
-    private MonitorConfiguration monitorConfiguration = new MonitorConfiguration("NetScaler", "Custom Metrics|NetScaler|", Mockito.mock(AMonitorJob.class));
+    private MonitorConfiguration monitorConfiguration = new MonitorConfiguration("NetScaler",
+            "Custom Metrics|NetScaler|", Mockito.mock(AMonitorJob.class));
 
     @Test
     public void parseNodeDataTest_SystemMetrics() throws Exception {
@@ -41,7 +42,7 @@ public class MetricDataParserTest {
         MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedSystemMetrics.size());
-        for(Metric metric : result) {
+        for (Metric metric : result) {
             Assert.assertTrue(expectedSystemMetrics.containsKey(metric.getMetricPath()));
             Assert.assertTrue(expectedSystemMetrics.get(metric.getMetricPath())
                     .equals(metric.getMetricValue()));
@@ -59,7 +60,7 @@ public class MetricDataParserTest {
         MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedLoadBalancingMetrics.size());
-        for(Metric metric : result) {
+        for (Metric metric : result) {
             Assert.assertTrue(expectedLoadBalancingMetrics.containsKey(metric.getMetricPath()));
             Assert.assertTrue(expectedLoadBalancingMetrics.get(metric.getMetricPath())
                     .equals(metric.getMetricValue()));
@@ -77,7 +78,7 @@ public class MetricDataParserTest {
         MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedServiceMetrics.size());
-        for(Metric metric : result) {
+        for (Metric metric : result) {
             Assert.assertTrue(expectedServiceMetrics.containsKey(metric.getMetricPath()));
             Assert.assertTrue(expectedServiceMetrics.get(metric.getMetricPath())
                     .equals(metric.getMetricValue()));
@@ -107,8 +108,8 @@ public class MetricDataParserTest {
         expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 2|Responses", "15");
         expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 2|Server Connections", "15");
         expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 2|Client Connections", "15");
-        expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 1|State", "1");
-        expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 2|State", "1");
+        expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 1|State", "UP");
+        expectedLBMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Load Balancing Server Metrics|LB Server 2|State", "UP");
 
         return expectedLBMetrics;
     }
@@ -122,7 +123,7 @@ public class MetricDataParserTest {
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 1|Server Connections", "20");
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 1|Client Connections", "20");
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 1|Active Transactions", "20");
-        expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 1|State", "2");
+        expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 1|State", "UNKNOWN");
 
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|Throughput (MBPS)", "20");
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|Average time to first byte", "20");
@@ -131,7 +132,7 @@ public class MetricDataParserTest {
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|Server Connections", "20");
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|Client Connections", "20");
         expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|Active Transactions", "20");
-        expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|State", "2");
+        expectedServiceMetrics.put(monitorConfiguration.getMetricPrefix() + "|NetScaler Instance 1|Service Metrics|Service 2|State", "UNKNOWN");
         return expectedServiceMetrics;
     }
 }

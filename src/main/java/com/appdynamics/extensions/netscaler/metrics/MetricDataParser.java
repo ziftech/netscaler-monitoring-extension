@@ -41,7 +41,7 @@ class MetricDataParser {
     List<Metric> parseNodeData(Stat stat, JsonNode nodes, ObjectMapper oMapper, String serverName) {
         JsonNode currentNode;
         if (nodes != null) {
-            currentNode = nodes.get(stat.getFilterName());
+            currentNode = nodes.get(stat.getRootElement());
             if (currentNode != null) {
                 if (!currentNode.isArray()) {
                     for (MetricConfig metricConfig : stat.getMetricConfig()) {
@@ -56,7 +56,7 @@ class MetricDataParser {
                 }
 
             } else {
-                logger.debug("{} metrics are not available for server: {}. Skipping.", stat.getFilterName(), serverName);
+                logger.debug("{} metrics are not available for server: {}. Skipping.", stat.getRootElement(), serverName);
             }
         }
         return metrics;
@@ -65,13 +65,9 @@ class MetricDataParser {
     private Metric parseAndRetrieveMetric(MetricConfig metricConfig, Stat stat, JsonNode currentNode, ObjectMapper oMapper,
                                           String serverName) {
         Metric metric = null;
-        BigDecimal metricValue;
+        String metricValue;
         if (currentNode.has(metricConfig.getAttr())) {
-            if (metricConfig.hasConverter()) {
-                metricValue = convertMetricValue(metricConfig, currentNode);
-            } else {
-                metricValue = new BigDecimal(currentNode.findValue(metricConfig.getAttr()).asText());
-            }
+            metricValue = currentNode.findValue(metricConfig.getAttr()).asText();
             if (metricValue != null) {
                 String prefix = StringUtils.trim(stat.getAlias(), "|");
                 String name = (currentNode.has("name")) ? currentNode.get("name").asText() + "|" : "";
@@ -83,20 +79,5 @@ class MetricDataParser {
             }
         }
         return metric;
-    }
-
-    private BigDecimal convertMetricValue(MetricConfig metricConfig, JsonNode currentNode) {
-        BigDecimal value = null;
-        String valueToBeConverted;
-        if (metricConfig.getConverters() != null) {
-            valueToBeConverted = currentNode.findValue(metricConfig.getAttr()).asText();
-            for (MetricConverter converter : metricConfig.getConverters()) {
-                if (valueToBeConverted.equals(converter.getLabel())) {
-                    logger.debug("Found metric {} for conversion", metricConfig.getAttr());
-                    value = new BigDecimal(converter.getValue());
-                }
-            }
-        }
-        return value;
     }
 }

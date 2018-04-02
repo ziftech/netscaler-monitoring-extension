@@ -7,7 +7,7 @@
   -->
 
 <stats>
-    <stat url="/nitro/v1/stat/system" filter-name="system" alias="System Metrics">
+    <stat url="/nitro/v1/stat/system" rootElement="system" alias="System Metrics">
         <naming use-entry-name="true"/>
         <metric attr="cpuusagepcnt" alias="CPU utilization %" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
         <metric attr="memsizemb" alias="Allocated Memory (MB)" aggregation-type="AVERAGE" timeRollupType="AVERAGE" clusterRollupType="INDIVIDUAL" />
