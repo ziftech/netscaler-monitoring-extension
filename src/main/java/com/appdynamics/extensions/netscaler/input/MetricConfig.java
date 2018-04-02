@@ -118,11 +118,7 @@ public class MetricConfig {
         return converterMap;
     }
 
-    public void setConvert(MetricConverter[] converters) {
+    public void setConvert(MetricConverter[] convert) {
         this.convert = convert;
     }
-
-/*    //public boolean hasConverter() {
-        return converters !=null && converters.length > 0;
-    }*/
 }
