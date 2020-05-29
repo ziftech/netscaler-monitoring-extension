@@ -38,6 +38,7 @@ public class NetScalerMonitorTask implements AMonitorTaskRunnable {
     public void run() {
         try {
             Phaser phaser = new Phaser();
+            phaser.register();
             Stat.Stats metricConfiguration = (Stat.Stats) monitorContextConfiguration.getMetricsXml();
             for (Stat stat : metricConfiguration.getStats()) {
                 phaser.register();
