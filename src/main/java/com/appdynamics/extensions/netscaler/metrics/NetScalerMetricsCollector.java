@@ -48,7 +48,7 @@ public class NetScalerMetricsCollector implements Runnable {
         this.monitorContext = monitorContext;
         this.server = server;
         this.phaser = phaser;
-        phaser.register();
+        this.phaser.register();
         this.metricWriteHelper = metricWriteHelper;
         this.endpoint = buildUrl(server, stat.getUrl());
         this.metricPrefix = metricPrefix;
