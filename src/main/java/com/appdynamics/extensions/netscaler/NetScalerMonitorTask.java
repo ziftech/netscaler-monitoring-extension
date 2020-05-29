@@ -41,7 +41,6 @@ public class NetScalerMonitorTask implements AMonitorTaskRunnable {
             phaser.register();
             Stat.Stats metricConfiguration = (Stat.Stats) monitorContextConfiguration.getMetricsXml();
             for (Stat stat : metricConfiguration.getStats()) {
-                phaser.register();
                 NetScalerMetricsCollector netScalerMetricsCollector = new NetScalerMetricsCollector(stat, monitorContextConfiguration.getContext(), server, phaser, metricWriteHelper, monitorContextConfiguration.getMetricPrefix());
                 monitorContextConfiguration.getContext().getExecutorService().execute("MetricCollectorTask", netScalerMetricsCollector);
                 logger.debug("Registering MetricCollectorTask phaser for {}", server.get("name"));
