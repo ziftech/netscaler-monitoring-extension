@@ -48,6 +48,7 @@ public class NetScalerMetricsCollector implements Runnable {
         this.monitorContext = monitorContext;
         this.server = server;
         this.phaser = phaser;
+        phaser.register();
         this.metricWriteHelper = metricWriteHelper;
         this.endpoint = buildUrl(server, stat.getUrl());
         this.metricPrefix = metricPrefix;
@@ -56,7 +57,6 @@ public class NetScalerMetricsCollector implements Runnable {
 
     public void run() {
         try {
-            phaser.register();
             serverName = server.get("name");
             logger.info("Currently fetching metrics from endpoint: {}", endpoint);
             JsonNode jsonData = HttpClientUtils.getResponseAsJson(monitorContext.getHttpClient(), endpoint,
