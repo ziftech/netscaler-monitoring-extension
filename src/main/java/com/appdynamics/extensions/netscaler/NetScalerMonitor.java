@@ -11,6 +11,7 @@ package com.appdynamics.extensions.netscaler;
 import com.appdynamics.extensions.ABaseMonitor;
 import com.appdynamics.extensions.TasksExecutionServiceProvider;
 import com.appdynamics.extensions.logging.ExtensionsLoggerFactory;
+import com.appdynamics.extensions.netscaler.input.Stat;
 import com.appdynamics.extensions.util.AssertUtils;
 import org.slf4j.Logger;
 
@@ -52,4 +53,9 @@ public class NetScalerMonitor extends ABaseMonitor {
         return (List) getContextConfiguration().getConfigYml().get("servers");
     }
 
+    @Override
+    protected void initializeMoreStuff(Map<String, String> args) {
+        this.getContextConfiguration().setMetricXml(args.get("metric-file"), Stat.Stats.class);
+
+    }
 }
