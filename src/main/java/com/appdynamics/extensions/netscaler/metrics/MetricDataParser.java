@@ -8,18 +8,15 @@
 
 package com.appdynamics.extensions.netscaler.metrics;
 
-import com.appdynamics.extensions.conf.MonitorConfiguration;
+import com.appdynamics.extensions.logging.ExtensionsLoggerFactory;
 import com.appdynamics.extensions.metrics.Metric;
 import com.appdynamics.extensions.netscaler.input.MetricConfig;
-import com.appdynamics.extensions.netscaler.input.MetricConverter;
 import com.appdynamics.extensions.netscaler.input.Stat;
 import com.appdynamics.extensions.util.StringUtils;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +27,12 @@ import java.util.Map;
 
 class MetricDataParser {
 
-    private static final Logger logger = LoggerFactory.getLogger(MetricDataParser.class);
-    private MonitorConfiguration monitorConfiguration;
+    private static final Logger logger = ExtensionsLoggerFactory.getLogger(MetricDataParser.class);
+    private String metricPrefix;
     private List<Metric> metrics = new ArrayList<>();
 
-    MetricDataParser(MonitorConfiguration monitorConfiguration) {
-        this.monitorConfiguration = monitorConfiguration;
+    MetricDataParser(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
     }
 
     List<Metric> parseNodeData(Stat stat, JsonNode nodes, ObjectMapper oMapper, String serverName) {
@@ -73,7 +70,7 @@ class MetricDataParser {
                 String name = (currentNode.has("name")) ? currentNode.get("name").asText() + "|" : "";
                 Map<String, String> propertiesMap = oMapper.convertValue(metricConfig, Map.class);
                 metric = new Metric(metricConfig.getAlias(), String.valueOf(metricValue),
-                        monitorConfiguration.getMetricPrefix() + "|" + serverName + "|" + prefix + "|" + name
+                        metricPrefix + "|" + serverName + "|" + prefix + "|" + name
                                 + metricConfig.getAlias(), propertiesMap);
                 logger.info("Adding metric {} to the queue for publishing", metric.getMetricPath());
             }

@@ -1,5 +1,7 @@
 # Please refer to step 4 in the Extensions Troubleshooting Document for instructions on how to obtain your Tier ID
 # Please make sure your metric prefix always ends with a '|'
+#This will create this metric in all the tiers, under this path
+#metricPrefix: Custom Metrics|NetScaler Monitor|
 metricPrefix: "Server|Component:<TIER ID>|Custom Metrics|NetScaler Monitor|"
 
 # Configure your NetScaler ADX servers here
@@ -16,3 +18,23 @@ servers:
 encryptionKey:
 
 numberOfThreads: 20
+
+
+# Default information needs to be updated
+controllerInfo:
+  controllerHost: "controller"
+  controllerPort: 8080
+  account: "customer1"
+  username: "user1"
+  password: "welcome"
+  encryptedPassword: ""
+  encryptionKey: ""
+  controllerSslEnabled: false
+  enableOrchestration: false
+  uniqueHostId: ""
+  accountAccessKey: ""
+  machinePath: ""
+  simEnabled: true
+  applicationName: ""
+  tierName: ""
+  nodeName: ""

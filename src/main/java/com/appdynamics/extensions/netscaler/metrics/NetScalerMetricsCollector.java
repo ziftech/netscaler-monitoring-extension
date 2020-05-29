@@ -9,17 +9,15 @@
 package com.appdynamics.extensions.netscaler.metrics;
 
 import com.appdynamics.extensions.MetricWriteHelper;
-import com.appdynamics.extensions.conf.MonitorConfiguration;
+import com.appdynamics.extensions.conf.MonitorContext;
 import com.appdynamics.extensions.http.HttpClientUtils;
 import com.appdynamics.extensions.http.UrlBuilder;
+import com.appdynamics.extensions.logging.ExtensionsLoggerFactory;
 import com.appdynamics.extensions.metrics.Metric;
 import com.appdynamics.extensions.netscaler.input.Stat;
-import net.minidev.json.JSONNavi;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -32,9 +30,9 @@ import java.util.concurrent.Phaser;
  */
 public class NetScalerMetricsCollector implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(NetScalerMetricsCollector.class);
+    private static final Logger logger = ExtensionsLoggerFactory.getLogger(NetScalerMetricsCollector.class);
     private Stat stat;
-    private MonitorConfiguration monitorConfiguration;
+    private MonitorContext monitorContext;
     private Map<String, String> server;
     private Phaser phaser;
     private MetricWriteHelper metricWriteHelper;
@@ -42,27 +40,30 @@ public class NetScalerMetricsCollector implements Runnable {
     private MetricDataParser metricDataParser;
     private String endpoint;
     private String serverName;
+    private String metricPrefix;
 
-    public NetScalerMetricsCollector(Stat stat, MonitorConfiguration monitorConfiguration, Map<String, String> server,
-                                     Phaser phaser, MetricWriteHelper metricWriteHelper) {
+    public NetScalerMetricsCollector(Stat stat, MonitorContext monitorContext, Map<String, String> server,
+                                     Phaser phaser, MetricWriteHelper metricWriteHelper, String metricPrefix) {
         this.stat = stat;
-        this.monitorConfiguration = monitorConfiguration;
+        this.monitorContext = monitorContext;
         this.server = server;
         this.phaser = phaser;
+        this.phaser.register();
         this.metricWriteHelper = metricWriteHelper;
-        this.metricDataParser = new MetricDataParser(monitorConfiguration);
         this.endpoint = buildUrl(server, stat.getUrl());
+        this.metricPrefix = metricPrefix;
+        this.metricDataParser = new MetricDataParser(metricPrefix);
     }
 
     public void run() {
         try {
             serverName = server.get("name");
             logger.info("Currently fetching metrics from endpoint: {}", endpoint);
-            JsonNode jsonData = HttpClientUtils.getResponseAsJson(monitorConfiguration.getHttpClient(), endpoint,
+            JsonNode jsonData = HttpClientUtils.getResponseAsJson(monitorContext.getHttpClient(), endpoint,
                     JsonNode.class);
             metrics.addAll(metricDataParser.parseNodeData(stat, jsonData, new ObjectMapper(), serverName));
             metrics.add(new Metric("Heart Beat", String.valueOf(BigInteger.ONE),
-                    monitorConfiguration.getMetricPrefix() + "|" + serverName + "|Heart Beat"));
+                    metricPrefix + "|" + serverName + "|Heart Beat"));
             if (metrics != null && metrics.size() > 0) {
                 logger.debug("Printing {} metrics for stat: {}", metrics.size(), stat.getAlias());
                 metricWriteHelper.transformAndPrintMetrics(metrics);
@@ -70,7 +71,7 @@ public class NetScalerMetricsCollector implements Runnable {
         } catch (Exception ex) {
             logger.error("Error encountered while collecting metrics from endpoint: " + endpoint, ex.getMessage());
             metrics.add(new Metric("Heart Beat", String.valueOf(BigInteger.ZERO),
-                    monitorConfiguration.getMetricPrefix() + "|" + serverName + "|Heart Beat"));
+                    metricPrefix + "|" + serverName + "|Heart Beat"));
 
         } finally {
             logger.debug("Completing metric collection from endpoint: " + endpoint);

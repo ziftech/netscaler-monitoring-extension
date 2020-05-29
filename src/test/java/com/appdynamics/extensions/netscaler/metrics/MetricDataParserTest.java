@@ -9,16 +9,17 @@
 package com.appdynamics.extensions.netscaler.metrics;
 
 import com.appdynamics.extensions.AMonitorJob;
-import com.appdynamics.extensions.conf.MonitorConfiguration;
+import com.appdynamics.extensions.conf.MonitorContextConfiguration;
 import com.appdynamics.extensions.metrics.Metric;
 import com.appdynamics.extensions.netscaler.input.Stat;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
@@ -28,18 +29,18 @@ import java.util.Map;
  */
 public class MetricDataParserTest {
 
-    private MonitorConfiguration monitorConfiguration = new MonitorConfiguration("NetScaler",
-            "Custom Metrics|NetScaler|", Mockito.mock(AMonitorJob.class));
+    private MonitorContextConfiguration monitorConfiguration = new MonitorContextConfiguration("NetScaler",
+            "Custom Metrics|NetScaler|", new File(""), Mockito.mock(AMonitorJob.class));
 
     @Test
     public void parseNodeDataTest_SystemMetrics() throws Exception {
-        monitorConfiguration.setMetricsXml("src/test/resources/conf/system-metrics.xml", Stat.Stats.class);
-        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXmlConfiguration();
+        monitorConfiguration.setMetricXml("src/test/resources/conf/system-metrics.xml", Stat.Stats.class);
+        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXml();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readValue(new FileInputStream("src/test/resources/json/system.json"), JsonNode.class);
         Stat stat = metricConfiguration.getStats()[0];
         Map<String, String> expectedSystemMetrics = getExpectedSystemMetrics();
-        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
+        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration.getMetricPrefix());
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedSystemMetrics.size());
         for (Metric metric : result) {
@@ -51,13 +52,13 @@ public class MetricDataParserTest {
 
     @Test
     public void parseNodeDataTest_LoadBalancingMetrics() throws Exception {
-        monitorConfiguration.setMetricsXml("src/test/resources/conf/loadbalancing-metrics.xml", Stat.Stats.class);
-        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXmlConfiguration();
+        monitorConfiguration.setMetricXml("src/test/resources/conf/loadbalancing-metrics.xml", Stat.Stats.class);
+        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXml();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readValue(new FileInputStream("src/test/resources/json/loadbalancing.json"), JsonNode.class);
         Stat stat = metricConfiguration.getStats()[0];
         Map<String, String> expectedLoadBalancingMetrics = getExpectedLoadBalancingMetrics();
-        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
+        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration.getMetricPrefix());
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedLoadBalancingMetrics.size());
         for (Metric metric : result) {
@@ -69,13 +70,13 @@ public class MetricDataParserTest {
 
     @Test
     public void parseNodeDataTest_ServiceMetrics() throws Exception {
-        monitorConfiguration.setMetricsXml("src/test/resources/conf/service-metrics.xml", Stat.Stats.class);
-        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXmlConfiguration();
+        monitorConfiguration.setMetricXml("src/test/resources/conf/service-metrics.xml", Stat.Stats.class);
+        Stat.Stats metricConfiguration = (Stat.Stats) monitorConfiguration.getMetricsXml();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readValue(new FileInputStream("src/test/resources/json/service.json"), JsonNode.class);
         Stat stat = metricConfiguration.getStats()[0];
         Map<String, String> expectedServiceMetrics = getExpectedServiceMetrics();
-        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration);
+        MetricDataParser metricDataParser = new MetricDataParser(monitorConfiguration.getMetricPrefix());
         List<Metric> result = metricDataParser.parseNodeData(stat, node, new ObjectMapper(), "NetScaler Instance 1");
         Assert.assertTrue(result.size() == expectedServiceMetrics.size());
         for (Metric metric : result) {
