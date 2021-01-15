@@ -175,8 +175,8 @@ Always feel free to fork and contribute any changes directly via [GitHub](https:
 ## Version
 |          Name            |  Version   |
 |--------------------------|------------|
-|Extension Version         |1.0.2       |
+|Extension Version         |1.0.3       |
 |Controller Compatibility  |4.5 or Later|
 |Product Tested On         |NetScaler VPX 10.x on AWS|
-|Last Update               |05/29/2020 |
+|Last Update               |01/08/2021 |
 |List of Changes           |[Change log](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/netscaler-monitoring-extension-1.0.0/changelog.md) |
