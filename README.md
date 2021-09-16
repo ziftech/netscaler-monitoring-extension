@@ -19,31 +19,34 @@ resources using the NITRO API. These metrics can be classified under the followi
 
 ### Prerequisites 
 
-In order to use this extension, you do need a [Standalone JAVA Machine Agent](https://docs.appdynamics.com/display/PRO44/Java+Agent) or [SIM Agent](https://docs.appdynamics.com/display/PRO44/Server+Visibility). 
-For more details on downloading these products, please visit https://download.appdynamics.com/.
+Before the extension is installed, the prerequisites mentioned [here](https://community.appdynamics.com/t5/Knowledge-Base/Extensions-Prerequisites-Guide/ta-p/35213) need to be met. Please do not proceed with the extension installation if the specified prerequisites are not met.
+
+The NetScaler extension connects to the Citrix Netscaler appliance using the NITRO REST API. 
 
 The extension needs to be able to connect to the NetScaler NITRO API in order to be able to collect and send the metrics. 
 To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
 
-The NetScaler extension connects to the Citrix Netscaler appliance using the NITRO REST API. 
-
 
 ### Installation 
 1. To build from source, clone this repository and run 'mvn clean install'. This will produce a NetScalerMonitor-VERSION.zip in the target directory
-Alternatively, download the latest release archive from [Github](https://github.com/Appdynamics/netscaler-monitoring-extension/releases)
 2. Unzip the file NetScalerMonitor-[version].zip into `<MACHINE_AGENT_HOME>/monitors/`
 3. In the newly created directory "NetScalerMonitor", edit the config.yml configuring the parameters (See Configuration section below)
 4. Restart the machine agent
-5. In the AppDynamics Metric Browser, look for: Application Infrastructure Performance|\<Tier\>|Custom Metrics|NetScaler  .
+
+Please place the extension in the **"monitors"** directory of your **Machine Agent** installation directory. Do not place the extension in the **"extensions"** directory of your **Machine Agent** installation directory.
 
 ### Configuration 
 1. Configure the NetScaler parameters by editing the config.yml file in `<MACHINE_AGENT_HOME>/monitors/NetScalerMonitor/`. 
 
    Here is a sample config.yml file
     ```    
-    # Please refer to step 4 in the Extensions Troubleshooting Document for instructions on how to obtain your Tier ID
-    # Please make sure your metric prefix always ends with a '|'
-    metricPrefix: "Server|Component:<Tier ID/Tier Name>|Custom Metrics|Netscaler Monitor|"
+    # Please refer to Extensions Troubleshooting Document (https://community.appdynamics.com/t5/Knowledge-Base/How-do-I-troubleshoot-missing-custom-metrics-or-extensions/ta-p/28695) for instructions on how to configure metric prefix
+    
+    #Metric prefix when SIM is enabled
+    #metricPrefix: Custom Metrics|NetScaler Monitor|
+    
+    #This will create this metric in the tier, under this path
+    metricPrefix: "Server|Component:<Tier ID>|Custom Metrics|Netscaler Monitor|"
     
     # Configure your Netscaler ADX servers here
     servers:
@@ -158,7 +161,8 @@ Always feel free to fork and contribute any changes directly via [GitHub](https:
 |          Name            |  Version   |
 |--------------------------|------------|
 |Extension Version         |1.0.3       |
-|Controller Compatibility  |4.5 or Later|
 |Product Tested On         |NetScaler VPX 10.x on AWS|
 |Last Update               |01/08/2021 |
-|List of Changes           |[Change log](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/netscaler-monitoring-extension-1.0.0/changelog.md) |
+|Change List           |[ChangeLog](https://github.com/Appdynamics/netscaler-monitoring-extension/blob/master/CHANGELOG.md) |
+
+**Note**: While extensions are maintained and supported by customers under the open-source licensing model, they interact with agents and Controllers that are subject to [AppDynamics’ maintenance and support policy](https://docs.appdynamics.com/latest/en/product-and-release-announcements/maintenance-support-for-software-versions). Some extensions have been tested with AppDynamics 4.5.13+ artifacts, but you are strongly recommended against using versions that are no longer supported.   
