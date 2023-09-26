@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright 2018. AppDynamics LLC and its affiliates.
+  ~ All Rights Reserved.
+  ~ This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+  ~ The copyright notice above does not evidence any actual or intended publication of such source code.
+  ~
+  -->
+
+<stats>
+    <stat url="/nitro/v1/stat/system" rootElement="system" alias="System Metrics">
+        <metric attr="cpuusagepcnt" alias="CPU utilization %" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memsizemb" alias="Allocated Memory (MB)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memusagepcnt" alias="Memory Utilization %" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="numcpus" alias="CPU Count" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="memuseinmb" alias="Memory used (MB)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+
+    </stat>
+
+    <stat url="/nitro/v1/stat/lbvserver" rootElement="lbvserver" alias="Load Balancing Server Metrics">
+        <metric attr="tothits" alias="Hits" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalrequests" alias="Requests" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalresponses" alias="Responses" aggregationType="OBSERVATION" timeRollUpType="OBSERVATION" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="cursrvrconnections" alias="Server Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="curclntconnections" alias="Client Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="state" alias="State" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL">
+            <convert str="DOWN" value="0"/>
+            <convert str="UP" value="1"/>
+            <convert str="UNKNOWN" value="2"/>
+            <convert str="OFS" value="3"/>
+            <convert str="TROFS" value="4"/>
+            <convert str="TROFS_DOWN" value="5"/>
+        </metric>
+    </stat>
+
+    <stat url="/nitro/v1/stat/service" rootElement="service" alias="Service Metrics">
+        <metric attr="throughput" alias="Throughput (MBPS)" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="avgsvrttfb" alias="Average time to first byte" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalrequests" alias="Requests" aggregationType="OBSERVATION" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="totalresponses" alias="Responses" aggregationType="OBSERVATION" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="cursrvrconnections" alias="Server Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="curclntconnections" alias="Client Connections" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="activetransactions" alias="Active Transactions" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL" />
+        <metric attr="state" alias="State" aggregationType="AVERAGE" timeRollUpType="AVERAGE" clusterRollUpType="INDIVIDUAL">
+            <convert str="DOWN" value="0"/>
+            <convert str="UP" value="1"/>
+            <convert str="UNKNOWN" value="2"/>
+            <convert str="OFS" value="3"/>
+            <convert str="TROFS" value="4"/>
+            <convert str="TROFS_DOWN" value="5"/>
+        </metric>
+    </stat>
+</stats>

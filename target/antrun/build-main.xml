@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor"/>
+  <copy todir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor">
+    <fileset includes="monitor.xml" dir="src/main/resources/conf"/>
+    <fileset includes="metrics.xml" dir="src/main/resources/conf"/>
+    <fileset includes="config.yml" dir="src/main/resources/conf"/>
+    <fileset includes="LICENSE.txt" dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension"/>
+    <fileset includes="NOTICE.txt" dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension"/>
+  </copy>
+  <copy todir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor">
+    <fileset includes="netscaler-monitoring-extension.jar" dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target"/>
+  </copy>
+  <zip destfile="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor-1.0.3.zip">
+    <zipfileset prefix="NetScalerMonitor/" filemode="755" dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor"/>
+  </zip>
+  <delete dir="/Users/ykeranch/dev/MyGithub/netscaler-monitoring-extension/target/NetScalerMonitor"/>
+</target>
+</project>
